@@ -200,7 +200,7 @@ consultas con = new consultas();
         
         
         // Continuar con la lógica deseada después de un inicio de sesión exitoso
-        String pagina = "http://127.0.0.1:5500/main.html?" + idUsuario;
+        String pagina = "http://127.0.0.1:5500/main.html?userId=" + idUsuario;
         try {
             Desktop.getDesktop().browse(new URI(pagina));
         } catch (Exception e) {
