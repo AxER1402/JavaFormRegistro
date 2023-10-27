@@ -193,22 +193,32 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnRegistrarseActionPerformed
 
     private void jbtnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAccederActionPerformed
-consultas con = new consultas();
-    int idUsuario = con.accesoUsuario(JTextUsuario.getText(), JTextPass.getText());
+        String email = JTextUsuario.getText();
+        String pass = JTextPass.getText();
+    
+        if ("admin".equals(email) && "admin".equals(pass)) { // Usamos equals para comparar cadenas y comillas dobles para "admin"
+            String pagina = "http://127.0.0.1:5500/main.html?userId=admin";
+            try {
+                Desktop.getDesktop().browse(new URI(pagina));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            consultas con = new consultas();
+            int idUsuario = con.accesoUsuario(email, pass);
 
-    if (idUsuario != -1) {
-        
-        
-        // Continuar con la lógica deseada después de un inicio de sesión exitoso
-        String pagina = "http://127.0.0.1:5500/main.html?userId=" + idUsuario;
-        try {
-            Desktop.getDesktop().browse(new URI(pagina));
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (idUsuario != -1) {
+                // Continuar con la lógica deseada después de un inicio de sesión exitoso
+                String pagina = "http://127.0.0.1:5500/main.html?userId=" + idUsuario;
+                try {
+                    Desktop.getDesktop().browse(new URI(pagina));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Usuario o contraseña incorrectos");
+            }
         }
-    } else {
-        System.out.println("Usuario o contraseña incorrectos");
-    }
     }//GEN-LAST:event_jbtnAccederActionPerformed
 
     /**
